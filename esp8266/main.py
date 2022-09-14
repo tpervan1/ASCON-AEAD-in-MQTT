@@ -8,7 +8,7 @@ import urequests
 import ntptime
 import ujson as json
 
-broker= '192.168.1.101'
+broker= 'your_broker_ip_address'
 client_id='sensor01'
 topic_sub = b'house/balcony/weather/notification'
 topic_pub = b'house/balcony/weather/data'
@@ -18,7 +18,7 @@ message_interval = 1000*5
 web_query_delay = 1000*300
 update_time = time.ticks_ms() - web_query_delay
 
-key=(0xae772877c34b31ab55967e6e7f28a8e1).to_bytes(16,'big')
+key=(0x12345678123456781234567812345678).to_bytes(16,'big')
 associated_data = client_id.encode('utf-8')
 
 open_weather_map_api_key = 'your_api_key'
@@ -90,22 +90,4 @@ while True:
   except OSError as e:
     print(e.__class__.__name__,":", e )
     exit()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
