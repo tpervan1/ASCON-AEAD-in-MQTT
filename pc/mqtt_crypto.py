@@ -4,7 +4,7 @@ import time
 import ascon
 import os
 
-key=(0xae772877c34b31ab55967e6e7f28a8e1).to_bytes(16,'big')
+key=(0x12345678123456781234567812345678).to_bytes(16,'big')
 client_id='pcnode01'
 associated_data=client_id.encode('utf-8')
 
@@ -40,7 +40,7 @@ def on_message(client, userdata, msg):
     data=ascon.data_to_send(associated_data,nonce1,ciphertext,tag)
     client.publish('house/balcony/weather/notification', data)
 
-broker="192.168.1.101"
+broker="your_broker_ip_address"
 client=mqtt.Client(client_id)
 
 client.on_connect=on_connect
