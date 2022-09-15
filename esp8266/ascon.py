@@ -3,7 +3,7 @@ import gc
 import os
 import time
 
-#we form initial state s, then apply permutation and then xor with key
+#we form initial state s, apply permutation and then xor s with the key
 def initialization(key, nonce):
     #iv=k+r+a+b+ (160-k) zeros
     #k=128, r=128,a=12,b=8
@@ -136,11 +136,9 @@ def bytes_to_hex(bytes):
 def from_hex_to_byte(hex_string):
     return int(hex_string,16).to_bytes(len(hex_string)//2,'big')
 
-#accepts bytes data, converts it to hex and concats it
 def data_to_send(associated_data, nonce, ciphertext, tag):
     return associated_data+nonce+ciphertext+tag
 
-#accepts hex-string and converts it to bytes,returns each of required properties
 def data_to_retrieve(message, associated_data_length):
     associated_data=message[0:associated_data_length]
     nonce=message[associated_data_length:associated_data_length+16]
