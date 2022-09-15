@@ -136,11 +136,9 @@ def bytes_to_hex(bytes):
 def from_hex_to_byte(hex_string):
     return int(hex_string,16).to_bytes(len(hex_string)//2,'big')
 
-#accepts bytes data, converts it to hex and concats it
 def data_to_send(associated_data, nonce, ciphertext, tag):
     return associated_data+nonce+ciphertext+tag
 
-#accepts hex-string and converts it to bytes,returns each of required properties
 def data_to_retrieve(message, associated_data_length):
     associated_data=message[0:associated_data_length]
     nonce=message[associated_data_length:associated_data_length+16]
