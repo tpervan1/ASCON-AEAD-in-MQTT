@@ -18,6 +18,8 @@ message_interval = 1000*5
 web_query_delay = 1000*300
 update_time = time.ticks_ms() - web_query_delay
 
+#keeping keys here for simplicity; better approach would be to keep them in separate file or flash memory
+
 key=(0x12345678123456781234567812345678).to_bytes(16,'big')
 associated_data = client_id.encode('utf-8')
 
@@ -78,6 +80,8 @@ while True:
     if (time.ticks_ms() - last_message) > message_interval:
       weather_data={'humidity': humidity, 'pressure':pressure, 'temp':temperature}
       weather_data=json.dumps(weather_data)
+      
+      #have to add 946684800 to make timestamp compatible with unix time; internal clock here starts counting from 1.1.2000.
       msg=ascon.timestamped_message(time.time()+946684800, weather_data)
       nonce=ascon.generate_random_bytes(16)
       t1=time.ticks_ms()
